@@ -1,0 +1,29 @@
+
+	.niubi {height:40px; background-color: rgb(247, 155, 224);
+		color: mediumvioletred;
+        margin-top: 20px;
+	font-family: Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, "sans-serif";
+		text-align: end;
+		font-size: 20px;
+		padding-top:10px;
+		padding-right: 10px;
+		position:relative;}
+		
+	.column {
+		width: 800px; 
+		margin:auto;  
+        margin-top: 100px;
+        background-color: wheat;
+        padding-left: 30px;
+        padding-right: 30px;
+        padding-top: 20px;
+		
+    } 
+
+  
+
+
+  
+    
+    .box0 { height: 30px; width:150px; position:absolute; background-color: tomato;  top: 5px; left:20px; text-align: center; padding-top: 5px; border: 2px solid ; }
+    .box0:hover { height: 30px; width:150px; position:absolute; background-color: rgb(153, 0, 255);  top: 5px; left:20px; text-align: center; padding-top: 5px; border: 2px solid ; color:white}
