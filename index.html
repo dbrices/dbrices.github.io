@@ -1,73 +1,131 @@
-<!doctype html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>cpeslg10forever</title>
-<style>
-	body {background-color: rgb(43, 43, 43);}
-	.niubi {height:40px; background-color: rgb(247, 140, 220);
-		color: mediumvioletred;
-	font-family: Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, "sans-serif";
-		text-align: end;
-		font-size: 20px;
-		padding-top:10px;
-		padding-right: 10px;
-		position:relative;}
-		
-	.column {
-		width:570px; 
-		margin:auto;  
-		} 
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Unity WebGL Player | AudioGame250510</title>
+    <link rel="shortcut icon" href="TemplateData/favicon.ico">
+    <link rel="stylesheet" href="TemplateData/style.css">
+  </head>
+  <body>
+    <div id="unity-container" class="unity-desktop">
+      <canvas id="unity-canvas" width=960 height=600 tabindex="-1"></canvas>
+      <div id="unity-loading-bar">
+        <div id="unity-logo"></div>
+        <div id="unity-progress-bar-empty">
+          <div id="unity-progress-bar-full"></div>
+        </div>
+      </div>
+      <div id="unity-warning"> </div>
+      <div id="unity-footer">
+        <div id="unity-webgl-logo"></div>
+        <div id="unity-fullscreen-button"></div>
+        <div id="unity-build-title">AudioGame250510</div>
+      </div>
+    </div>
+    <script>
 
-	.box0 { height: 30px; width:150px; position:absolute; background-color: tomato;  top: 5px; left:20px; text-align: center; padding-top: 5px; border: 2px solid ; }
-	.box0:hover { height: 30px; width:150px; position:absolute; background-color: rgba(255, 152, 134, 0.834);  top: 5px; left:20px; text-align: center; padding-top: 5px; border: 2px solid ; }
+      var container = document.querySelector("#unity-container");
+      var canvas = document.querySelector("#unity-canvas");
+      var loadingBar = document.querySelector("#unity-loading-bar");
+      var progressBarFull = document.querySelector("#unity-progress-bar-full");
+      var fullscreenButton = document.querySelector("#unity-fullscreen-button");
+      var warningBanner = document.querySelector("#unity-warning");
 
-	.box1 { height:160px; width: 130px; background-color: rgba(238, 185, 218, 0.753);margin-top: 10px;float:left; text-align: center; font-size: 20px; margin-left: 10px; padding-top:10px; font-family:Verdana, Geneva, Tahoma, sans-serif; color:whitesmoke;}
-	.box1:hover { height:160px; width: 130px; background-color: rgba(255, 212, 239, 0.63);margin-top: 10px;float:left; text-align: center; font-size: 20px; margin-left: 10px; padding-top:10px; font-family:Verdana, Geneva, Tahoma, sans-serif; color:whitesmoke;}
+      // Shows a temporary message banner/ribbon for a few seconds, or
+      // a permanent error message on top of the canvas if type=='error'.
+      // If type=='warning', a yellow highlight color is used.
+      // Modify or remove this function to customize the visually presented
+      // way that non-critical warnings and error messages are presented to the
+      // user.
+      function unityShowBanner(msg, type) {
+        function updateBannerVisibility() {
+          warningBanner.style.display = warningBanner.children.length ? 'block' : 'none';
+        }
+        var div = document.createElement('div');
+        div.innerHTML = msg;
+        warningBanner.appendChild(div);
+        if (type == 'error') div.style = 'background: red; padding: 10px;';
+        else {
+          if (type == 'warning') div.style = 'background: yellow; padding: 10px;';
+          setTimeout(function() {
+            warningBanner.removeChild(div);
+            updateBannerVisibility();
+          }, 5000);
+        }
+        updateBannerVisibility();
+      }
 
-	.box2 { height:160px; width: 130px; background-color: rgba(238, 185, 218, 0.753);margin-top: 10px;float:left; text-align: center; font-size: 20px; margin-left: 10px; padding-top:10px; font-family:Verdana, Geneva, Tahoma, sans-serif; color:whitesmoke;}
-	.box3 { height:160px; width: 130px; background-color: rgba(238, 185, 218, 0.753);margin-top: 10px;float:left; text-align: center; font-size: 20px; margin-left: 10px; padding-top:10px; font-family:Verdana, Geneva, Tahoma, sans-serif; color:whitesmoke;}
-	.box4 { height:160px; width: 130px; background-color: rgba(238, 185, 218, 0.753);margin-top: 10px;float:left; text-align: center; font-size: 20px; margin-left: 10px; padding-top:10px; font-family:Verdana, Geneva, Tahoma, sans-serif; color:whitesmoke;}
-	.box5 { height:160px; width: 130px; background-color: rgba(238, 185, 218, 0.753);margin-top: 10px;float:left; text-align: center; font-size: 20px; margin-left: 10px; padding-top:10px; font-family:Verdana, Geneva, Tahoma, sans-serif; color:whitesmoke;}
-	.box6 { height:160px; width: 130px; background-color: rgba(238, 185, 218, 0.753);margin-top: 10px;float:left; text-align: center; font-size: 20px; margin-left: 10px; padding-top:10px; font-family:Verdana, Geneva, Tahoma, sans-serif; color:whitesmoke;}
-	.box7 { height:160px; width: 130px; background-color: rgba(238, 185, 218, 0.753);margin-top: 10px;float:left; text-align: center; font-size: 20px; margin-left: 10px; padding-top:10px; font-family:Verdana, Geneva, Tahoma, sans-serif; color:whitesmoke;}
-	.box8 { height:160px; width: 130px; background-color: rgba(238, 185, 218, 0.753);margin-top: 10px;float:left; text-align: center; font-size: 20px; margin-left: 10px; padding-top:10px; font-family:Verdana, Geneva, Tahoma, sans-serif; color:whitesmoke;}
-	.box9 { height:160px; width: 130px; background-color: rgba(238, 185, 218, 0.753);margin-top: 10px;float:left; text-align: center; font-size: 20px; margin-left: 10px; padding-top:10px; font-family:Verdana, Geneva, Tahoma, sans-serif; color:whitesmoke;}
-	.box3:hover { height:160px; width: 130px; background-color: rgba(255, 212, 239, 0.63);margin-top: 10px;float:left; text-align: center; font-size: 20px; margin-left: 10px; padding-top:10px; font-family:Verdana, Geneva, Tahoma, sans-serif; color:whitesmoke;}
-	.box4:hover { height:160px; width: 130px; background-color: rgba(255, 212, 239, 0.63);margin-top: 10px;float:left; text-align: center; font-size: 20px; margin-left: 10px; padding-top:10px; font-family:Verdana, Geneva, Tahoma, sans-serif; color:whitesmoke;}
-	.box5:hover { height:160px; width: 130px; background-color: rgba(255, 212, 239, 0.63);margin-top: 10px;float:left; text-align: center; font-size: 20px; margin-left: 10px; padding-top:10px; font-family:Verdana, Geneva, Tahoma, sans-serif; color:whitesmoke;}
-	.box6:hover { height:160px; width: 130px; background-color: rgba(255, 212, 239, 0.63);margin-top: 10px;float:left; text-align: center; font-size: 20px; margin-left: 10px; padding-top:10px; font-family:Verdana, Geneva, Tahoma, sans-serif; color:whitesmoke;}
-	.box7:hover { height:160px; width: 130px; background-color: rgba(255, 212, 239, 0.63);margin-top: 10px;float:left; text-align: center; font-size: 20px; margin-left: 10px; padding-top:10px; font-family:Verdana, Geneva, Tahoma, sans-serif; color:whitesmoke;}
-	.box8:hover { height:160px; width: 130px; background-color: rgba(255, 212, 239, 0.63);margin-top: 10px;float:left; text-align: center; font-size: 20px; margin-left: 10px; padding-top:10px; font-family:Verdana, Geneva, Tahoma, sans-serif; color:whitesmoke;}
-	.box9:hover { height:160px; width: 130px; background-color: rgba(255, 0, 162, 0.63);margin-top: 10px;float:left; text-align: center; font-size: 20px; margin-left: 10px; padding-top:10px; font-family:Verdana, Geneva, Tahoma, sans-serif; color:whitesmoke;}
-	.box2:hover { height:160px; width: 130px; background-color: rgba(255, 212, 239, 0.63);margin-top: 10px;float:left; text-align: center; font-size: 20px; margin-left: 10px; padding-top:10px; font-family:Verdana, Geneva, Tahoma, sans-serif; color:whitesmoke;}
+      var buildUrl = "Build";
+      var loaderUrl = buildUrl + "/SSS250511.loader.js";
+      var config = {
+        dataUrl: buildUrl + "/SSS250511.data.br",
+        frameworkUrl: buildUrl + "/SSS250511.framework.js.br",
+        codeUrl: buildUrl + "/SSS250511.wasm.br",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "DefaultCompany",
+        productName: "AudioGame250510",
+        productVersion: "1.0",
+        showBanner: unityShowBanner,
+      };
 
-	</style>
+      // By default, Unity keeps WebGL canvas render target size matched with
+      // the DOM size of the canvas element (scaled by window.devicePixelRatio)
+      // Set this to false if you want to decouple this synchronization from
+      // happening inside the engine, and you would instead like to size up
+      // the canvas DOM size and WebGL render target sizes yourself.
+      // config.matchWebGLToCanvasSize = false;
 
-</head>
-<div class="niubi">let's make flying great again!
-	<div class="box0" onclick="location.href='https://www.baidu.com'">about us</div>
-</div>
-<body>
-	
-	<div class="column">
-	<!--这里是从一到九的方块-->
-	<div class="box1" onclick="location.href='Mia.pages'">Mia<br><br>Hot air ballon</div>
-	<div class="box2" onclick="location.href='William.html'">William<br><br>How birds fly</div>
-	<div class="box3" onclick="location.href='Hanna.docx'">Hanna<br><br>Guide to <br>buy international air tickets</div>
-	<div class="box4" onclick="location.href='Tommy.docx'">Tommy<br><br>Plane history</div>
-	<div class="box5" onclick="location.href='Olivia.docx'">Olivia<br><br>Wings of animals and insects</div>
-	<div class="box6" onclick="location.href='Jaydon.docx'">Jaydon <br><br>Types of aircrafts</div>
-	<div class="box7" onclick="location.href='Reese.docx'">Reese<br><br>What we can take on the plane</div>
-	<div class="box8">8</div>
-	<div class="box9"onclick="location.href='test.html'">example: how birds fly<br><br>by william</div>
+      // If you would like all file writes inside Unity Application.persistentDataPath
+      // directory to automatically persist so that the contents are remembered when
+      // the user revisits the site the next time, uncomment the following line:
+      // config.autoSyncPersistentDataPath = true;
+      // This autosyncing is currently not the default behavior to avoid regressing
+      // existing user projects that might rely on the earlier manual
+      // JS_FileSystem_Sync() behavior, but in future Unity version, this will be
+      // expected to change.
 
-</div>
-<!--webpage by William Xu-->
-</body>
+      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+        // Mobile device style: fill the whole browser client area with the game canvas:
 
-	
+        var meta = document.createElement('meta');
+        meta.name = 'viewport';
+        meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
+        document.getElementsByTagName('head')[0].appendChild(meta);
+        container.className = "unity-mobile";
+        canvas.className = "unity-mobile";
+
+        // To lower canvas resolution on mobile devices to gain some
+        // performance, uncomment the following line:
+        // config.devicePixelRatio = 1;
 
 
+      } else {
+        // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
+
+        canvas.style.width = "960px";
+        canvas.style.height = "600px";
+      }
+
+      loadingBar.style.display = "block";
+
+      var script = document.createElement("script");
+      script.src = loaderUrl;
+      script.onload = () => {
+        createUnityInstance(canvas, config, (progress) => {
+          progressBarFull.style.width = 100 * progress + "%";
+              }).then((unityInstance) => {
+                loadingBar.style.display = "none";
+                fullscreenButton.onclick = () => {
+                  unityInstance.SetFullscreen(1);
+                };
+              }).catch((message) => {
+                alert(message);
+              });
+            };
+
+      document.body.appendChild(script);
+
+    </script>
+  </body>
 </html>
-

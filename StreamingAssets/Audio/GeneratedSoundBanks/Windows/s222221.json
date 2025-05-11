@@ -1,0 +1,49 @@
+{
+ "SoundBanksInfo": {
+  "Platform": "Windows",
+  "BasePlatform": "Windows",
+  "SchemaVersion": "16",
+  "SoundBankVersion": "154",
+  "SoundBanks": [
+   {
+    "Id": "3008373147",
+    "Type": "User",
+    "GUID": "{7C132100-0033-4958-AB23-C38DF590E4DE}",
+    "Language": "SFX",
+    "Hash": "{2B89D3EC-C089-ADEE-2620-E5479659D3CF}",
+    "ObjectPath": "\\SoundBanks\\Default Work Unit\\s222221",
+    "ShortName": "s222221",
+    "Path": "s222221.bnk",
+    "Plugins": {
+     "Custom": [
+      {
+       "Id": "399148367",
+       "Name": "Synth One",
+       "ObjectPath": "\\Actor-Mixer Hierarchy\\Default Work Unit\\SynthOne1\\Synth One",
+       "GUID": "{B3C50812-4906-4680-89EB-76AB5D07D248}",
+       "LibName": "Wwise Synth One",
+       "LibId": "9699330"
+      }
+     ]
+    },
+    "Events": [
+     {
+      "Id": "3205528029",
+      "Name": "Play_SynthOne1",
+      "ObjectPath": "\\Events\\Default Work Unit\\Play_SynthOne1",
+      "GUID": "{3D9CAAE1-7AEE-4AB8-A8D9-880837B6AFE8}",
+      "DurationType": "Unknown",
+      "PluginRefs": {
+       "Custom": [
+        {
+         "Id": "399148367"
+        }
+       ]
+      }
+     }
+    ]
+   }
+  ],
+  "FileHash": "{213E41C8-1030-3A64-C261-5A9D03A290B1}"
+ }
+}
